@@ -1,0 +1,48 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Forecast</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/weather_forecast.css' %}">
+</head>
+<body>
+    <div class="weather-container">
+        <div class="current-weather">
+            <h2 align="center">Weather in {{ weather.location.name }}, {{ weather.location.country }}</h2>
+            <div class="current-weather-details">
+
+            <p><strong>Weather:</strong> {{ weather.current.condition.text }}</p>
+            <p><strong>Temperature:</strong> {{ weather.current.temp_c }} °C</p>
+            <p><strong>Feels like:</strong> {{ weather.current.feelslike_c }} °C</p>
+            <p><strong>Wind speed:</strong> {{ weather.current.wind_kph }} k/h</p>
+            </div>
+        </div>
+        <div class="weather-icon-container">
+            {% if weather.current.condition.icon %}
+            <img src="{{ weather.current.condition.icon }}" alt="Weather Icon" class="weather-icon">
+            {% endif %}
+        </div>
+    </div>
+    <div class="forecast">
+        <h3 align="center">Weather Forecast for the Next Days</h3>
+        {% for day in weather.forecast.forecastday %}
+        <div class="forecast-day">
+            <div class="forecast-day-details">
+                <div>
+                    <p><strong>Date:</strong> {{ day.date }}</p>
+                    <p><strong>Weather:</strong> {{ day.day.condition.text }}</p>
+                    <p><strong>Average Temperature:</strong> {{ day.day.avgtemp_c }} °C</p>
+                    <p><strong>UV index:</strong> {{ day.day.uv }}</p>
+                </div>
+                {% if day.day.condition.icon %}
+                <img src="{{ day.day.condition.icon }}" alt="Weather Icon" class="weather-icon">
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</body>
+</html>

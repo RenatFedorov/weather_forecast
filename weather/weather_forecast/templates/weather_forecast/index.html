@@ -1,0 +1,38 @@
+<!-- apps/weather/templates/weather/forecast.html -->
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Прогноз погоды</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/index.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>Введите название города для прогноза погоды</h1>
+        <form method="post" id="city-form" action="{% url 'weather_forecast' %}">
+            {% csrf_token %}
+            <input type="text" id="city" name="city" autocomplete="off" placeholder="Введите город">
+            <button type="submit">Узнать погоду</button>
+        </form>
+
+        {% if last_city %}
+        <div class="last-city-button">
+            <form method="post" action="{% url 'weather_forecast' %}">
+                {% csrf_token %}
+                <input type="hidden" name="city" value="{{ last_city }}">
+                <button type="submit">Узнать погоду в {{ last_city }}</button>
+            </form>
+        </div>
+        {% endif %}
+
+        <div id="suggestions"></div>
+    </div>
+    <script>
+        var cityAutocompleteUrl = "{% url 'city_autocomplete' %}";
+    </script>
+    <script src="{% static 'js/autoadd.js' %}"></script>
+</body>
+</html>
