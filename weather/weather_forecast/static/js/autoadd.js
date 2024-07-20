@@ -43,13 +43,13 @@ $(document).ready(function() {
 
             $('#city').on('keydown', function(e) {
                 var suggestions = $('#suggestions').children();
-                if (e.keyCode === 40) { // down
+                if (e.keyCode === 40) { 
                     currentFocus++;
                     addActive(suggestions);
-                } else if (e.keyCode === 38) { // up
+                } else if (e.keyCode === 38) { 
                     currentFocus--;
                     addActive(suggestions);
-                } else if (e.keyCode === 13) { // enter
+                } else if (e.keyCode === 13) { 
                     e.preventDefault();
                     if (currentFocus > -1) {
                         if (suggestions) suggestions[currentFocus].click();
