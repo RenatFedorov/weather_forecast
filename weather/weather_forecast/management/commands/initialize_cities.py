@@ -1,5 +1,5 @@
 from django.core.management.base import BaseCommand
-from weather_forecast.cities.main import create_cities
+from weather_forecast.management.cities.main import create_cities
 
 
 class Command(BaseCommand):

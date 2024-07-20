@@ -1,6 +1,5 @@
 from rest_framework import serializers
 
-from weather_forecast.api.v1.pagination import CitySearchPagination
 from weather_forecast.models import CitySearchQuery
 
 

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-sleep 10
+sleep 5
 python manage.py makemigrations
 python manage.py migrate
 python manage.py collectstatic --noinput

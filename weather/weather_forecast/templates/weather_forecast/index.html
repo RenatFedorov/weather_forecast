@@ -1,21 +1,20 @@
-<!-- apps/weather/templates/weather/forecast.html -->
 {% load static %}
 
 <!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Прогноз погоды</title>
+    <title>Weather forecast</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" type="text/css" href="{% static 'css/index.css' %}">
 </head>
 <body>
     <div class="container">
-        <h1>Введите название города для прогноза погоды</h1>
+        <h1>Enter city name for weather forecast</h1>
         <form method="post" id="city-form" action="{% url 'weather_forecast' %}">
             {% csrf_token %}
-            <input type="text" id="city" name="city" autocomplete="off" placeholder="Введите город">
-            <button type="submit">Узнать погоду</button>
+            <input type="text" id="city" name="city" autocomplete="off" placeholder="Enter city">
+            <button type="submit">Check the weather</button>
         </form>
 
         {% if last_city %}
@@ -23,7 +22,7 @@
             <form method="post" action="{% url 'weather_forecast' %}">
                 {% csrf_token %}
                 <input type="hidden" name="city" value="{{ last_city }}">
-                <button type="submit">Узнать погоду в {{ last_city }}</button>
+                <button type="submit">Check the weather in {{ last_city }}</button>
             </form>
         </div>
         {% endif %}
