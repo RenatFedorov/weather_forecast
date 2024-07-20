@@ -29,7 +29,7 @@
 
 3. Запустите Docker Compose:
     ```sh
-    docker-compose up --build
+    docker compose up --build
     ```
 
 ## Использование
@@ -49,6 +49,13 @@
 
     Команда: python3 manage.py initialize_cities
     Описание: Создает записи для всех городов в базе данных. В дальнейшем города используются для автодополнения в поиске.
+
+## Тестирование   
+
+Для тестирования приложения запустите контейнер, откройте новое окно консоли в этой же директории и введите команду:   
+```sh
+docker compose exec web python manage.py test weather_forecast.tests
+```
 
 ## Что было реализовано   
 
