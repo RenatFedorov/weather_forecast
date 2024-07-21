@@ -10,7 +10,7 @@ class WeatherForecastViewTest(TestCase):
         City.objects.create(country="TestCountry", city="TestCity")
 
     @patch("weather_forecast.service.forecast_service.WeatherApiService.get_weather")
-    def test_get_weather_forecast(self, mock_get_weather):
+    def test_post_weather_forecast(self, mock_get_weather):
         mock_get_weather.return_value = {
             "location": {"name": "TestCity"},
             "current": {"temp_c": 20},
@@ -20,6 +20,14 @@ class WeatherForecastViewTest(TestCase):
         self.assertTemplateUsed(response, "weather_forecast/weather_forecast_post.html")
         self.assertContains(response, "TestCity")
         self.assertContains(response, "20")
+
+    def test_get_weather_forecast_redirect(self):
+        response = self.client.get(reverse("weather_forecast"))
+        self.assertEqual(response.status_code, 302)
+
+    def test_post_weather_forecast_without_data_redirect(self):
+        response = self.client.post(reverse("weather_forecast"))
+        self.assertEqual(response.status_code, 302)
 
     def test_index_page(self):
         response = self.client.get(reverse("index"))
